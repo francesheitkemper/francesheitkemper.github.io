@@ -1,7 +1,5 @@
 ---
-title: "francesheitkemper.github.io"
+title: "Frances Heitkemper"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I am a rising sophomore (class of 2029) at Haverford College, interested in majoring in statistics and minoring in computer science, economics, and German.
