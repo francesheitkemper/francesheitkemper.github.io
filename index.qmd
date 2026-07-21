@@ -1,5 +1,17 @@
 ---
 title: "Frances Heitkemper"
+
+about:
+    template: solana
+    links:
+    - text: LinkedIn
+      href: www.linkedin.com/in/francesheitkemper
+      target: _blank
+    - text: GitHub
+      href: https://github.com/francesheitkemper
+      target: _blank 
+    - text: Email
+      href: frances.heitkemper@gmail.com
 ---
 
 I am a rising sophomore (class of 2029) at Haverford College, interested in majoring in statistics and minoring in computer science, economics, and German.

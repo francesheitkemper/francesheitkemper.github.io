@@ -1,0 +1,60 @@
+---
+title: "European Parenting Leave Policies"
+author: "Frances Heitkemper"
+date: June 2, 2026
+format: 
+  html:
+    embed-resources: true
+    code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(gganimate)
+library(magick)
+library(broom)
+```
+
+```{r}
+eplp <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-02/eplp.csv')
+```
+
+```{r}
+europe <- ne_countries(continent = "europe", returnclass = "sf")
+yrs <- sort(unique(eplp$year))
+
+p <- europe |>
+    mutate(country2 = ifelse(iso_a2_eh == "GB", "UK", iso_a2_eh)) |>
+    tidyr::expand_grid(year = yrs) |>
+    st_as_sf() |>
+    left_join(eplp, by = c("country2" = "country", "year")) |>
+    #filter(year %in% c(1990, 1995, 2000, 2005)) |>
+    ggplot() +
+    geom_sf(aes(fill = jp_ld_m)) +
+    coord_sf(xlim = c(-10, 45), ylim = c(27,84)) +
+    #facet_wrap(~year)
+    transition_states(year, transition_length = 0, state_length = 1) +
+        labs(title = "year: {closest_state}")
+
+    animate(p)
+```
+
+
+```{r}
+eplp |>
+    ggplot(aes(x = par1_ld, y = jp_ld_m, color = year)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    facet_wrap( ~ par2_for_whom)
+```
+
+
+```{r}
+lm(jp_ld_m ~ par1_ld, data = eplp) |>
+    tidy()
+```

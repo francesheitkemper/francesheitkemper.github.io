@@ -3,20 +3,25 @@ project:
   output-dir: docs
 
 website:
-  title: "francesheitkemper.github.io"
+  title: "Frances Heitkemper"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: "Projects"
+        menu:
+        - text: "UK Baby Names"
+          href: UKBabyNames.qmd
+        - text: "Parenting"
+          href: Parenting.qmd
+        - text: "R Package 'biwt'"
+          href: https://hardin47.github.io/biwt/articles/biwt.html
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
-    css: styles.css
+      - morph
+      - styles.scss
     toc: true
-
-
-
+    page-layout: full

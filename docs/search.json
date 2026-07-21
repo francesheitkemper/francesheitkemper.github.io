@@ -12,5 +12,19 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "Parenting.html",
+    "href": "Parenting.html",
+    "title": "European Parenting Leave Policies",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(sf)\nlibrary(rnaturalearth)\nlibrary(gganimate)\nlibrary(magick)\nlibrary(broom)\n\n\neplp &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-02/eplp.csv')\n\n\neurope &lt;- ne_countries(continent = \"europe\", returnclass = \"sf\")\nyrs &lt;- sort(unique(eplp$year))\n\np &lt;- europe |&gt;\n    mutate(country2 = ifelse(iso_a2_eh == \"GB\", \"UK\", iso_a2_eh)) |&gt;\n    tidyr::expand_grid(year = yrs) |&gt;\n    st_as_sf() |&gt;\n    left_join(eplp, by = c(\"country2\" = \"country\", \"year\")) |&gt;\n    #filter(year %in% c(1990, 1995, 2000, 2005)) |&gt;\n    ggplot() +\n    geom_sf(aes(fill = jp_ld_m)) +\n    coord_sf(xlim = c(-10, 45), ylim = c(27,84)) +\n    #facet_wrap(~year)\n    transition_states(year, transition_length = 0, state_length = 1) +\n        labs(title = \"year: {closest_state}\")\n\n    animate(p)\n\n\n\n\n\n\n\n\n\neplp |&gt;\n    ggplot(aes(x = par1_ld, y = jp_ld_m, color = year)) +\n    geom_point() +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n    facet_wrap( ~ par2_for_whom)\n\n\n\n\n\n\n\n\n\nlm(jp_ld_m ~ par1_ld, data = eplp) |&gt;\n    tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   45.4      1.54        29.5 3.72e-143\n2 par1_ld        0.765    0.0261      29.3 1.06e-141"
+  },
+  {
+    "objectID": "UKBabyNames.html",
+    "href": "UKBabyNames.html",
+    "title": "UK Baby Names",
+    "section": "",
+    "text": "library(tidyverse)\n\n\nengland_wales_names &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/england_wales_names.csv')\nni_names &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/ni_names.csv')\nscotland_names &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/scotland_names.csv')\n\n\nscotland_names |&gt;\nfilter(Name %in% c(\"Frida\", \"Frances\", \"Natalie\", \"Sam\")) |&gt;\nggplot(aes(x = Year, y = Number, shape = Sex)) +\ngeom_point(color = \"purple\") +\ngeom_line(aes(color=Name))\n\n\n\n\n\n\n\nlabs(title = \"baby names\")\n\n&lt;ggplot2::labels&gt; List of 1\n $ title: chr \"baby names\""
   }
 ]

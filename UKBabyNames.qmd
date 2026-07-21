@@ -1,0 +1,31 @@
+---
+title: "UK Baby Names"
+author: "Frances Heitkemper"
+date: June 16, 2026
+format: 
+  html:
+    embed-resources: true
+    code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+```
+```{r}
+england_wales_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/england_wales_names.csv')
+ni_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/ni_names.csv')
+scotland_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-16/scotland_names.csv')
+```
+
+
+```{r}
+scotland_names |>
+filter(Name %in% c("Frida", "Frances", "Natalie", "Sam")) |>
+ggplot(aes(x = Year, y = Number, shape = Sex)) +
+geom_point(color = "purple") +
+geom_line(aes(color=Name))
+labs(title = "baby names")
+```

@@ -1,0 +1,18 @@
+/*-- scss:defaults --*/
+:root {
+  --bs-primary: #feb7c6 !important;
+  --bs-primary-rgb: 255, 105, 180 !important;
+  --bs-secondary: #fee2ee !important;
+  --bs-body-color: #333 !important;
+  --bs-body-bg: #fdf2f2 !important;
+}
+
+/*-- scss:rules --*/
+.navbar {
+  background-color: var(--bs-primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
