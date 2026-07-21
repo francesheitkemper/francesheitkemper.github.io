@@ -5,7 +5,7 @@ project:
 website:
   title: "Frances Heitkemper"
   navbar:
-    left:
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
