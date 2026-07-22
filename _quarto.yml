@@ -12,4 +12,16 @@ website:
       - text: "Projects"
         menu:
         - text: "UK Baby Names"
-          href: UKBabyNames.qm
+          href: UKBabyNames.qmd
+        - text: "Parenting"
+          href: Parenting.qmd
+        - text: "R Package 'biwt'"
+          href: https://hardin47.github.io/biwt/articles/biwt.html
+
+format:
+  html:
+    theme:
+      - morph
+      - styles.scss
+    toc: true
+    page-layout: full
