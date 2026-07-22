@@ -8,12 +8,13 @@ website:
     right:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: resume.qmd
+        text: "Resume"
       - text: "Projects"
         menu:
         - text: "UK Baby Names"
           href: UKBabyNames.qmd
-        - text: "Parenting"
+        - text: "European Parenting Leave Policies"
           href: Parenting.qmd
         - text: "R Package 'biwt'"
           href: https://hardin47.github.io/biwt/articles/biwt.html

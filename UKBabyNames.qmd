@@ -22,8 +22,11 @@ scotland_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatasci
 
 
 ```{r}
+#| fig.cap: "hi"
+#| fig.alt: "hi"
+
 scotland_names |>
-filter(Name %in% c("Frida", "Frances", "Natalie", "Sam")) |>
+filter(Name %in% c("Taylor", "Sam", "Charlie", "Alex", "Blake")) |>
 ggplot(aes(x = Year, y = Number, shape = Sex)) +
 geom_point(color = "purple") +
 geom_line(aes(color=Name))

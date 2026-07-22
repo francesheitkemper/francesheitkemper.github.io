@@ -3,16 +3,41 @@
   --bs-primary: #feb7c6 !important;
   --bs-primary-rgb: 255, 105, 180 !important;
   --bs-secondary: #fee2ee !important;
-  --bs-body-color: #333 !important;
-  --bs-body-bg: #fdf2f2 !important;
+  --bs-body-color: #000000 !important;
+  --bs-body-bg: #fef9f9 !important;
 }
+
+$code-block-bg: #ffebeb;
+$code-block-border-left: #feb7c6;
 
 /*-- scss:rules --*/
 .navbar {
   background-color: var(--bs-primary) !important;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #000000 !important;
+}
+
 .btn-primary {
   background-color: var(--bs-primary) !important;
   border-color: var(--bs-primary) !important;
+}
+
+.about-link {
+  color: #c94f7c !important;
+}
+
+.about-link:hover {
+  color: #833655 !important;
+}
+
+.navbar-title,
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #333 !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #833655 !important;
 }
