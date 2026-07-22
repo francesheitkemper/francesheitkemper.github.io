@@ -48,13 +48,4 @@ p <- europe |>
 ```{r}
 eplp |>
     ggplot(aes(x = par1_ld, y = jp_ld_m, color = year)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, color = "red") +
-    facet_wrap( ~ par2_for_whom)
-```
-
-
-```{r}
-lm(jp_ld_m ~ par1_ld, data = eplp) |>
-    tidy()
-```
+    geom_po

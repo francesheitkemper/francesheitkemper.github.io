@@ -23,9 +23,4 @@ scotland_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatasci
 
 ```{r}
 scotland_names |>
-filter(Name %in% c("Frida", "Frances", "Natalie", "Sam")) |>
-ggplot(aes(x = Year, y = Number, shape = Sex)) +
-geom_point(color = "purple") +
-geom_line(aes(color=Name))
-labs(title = "baby names")
-```
+filter(Name %in% c("Frida", "Frances", "Natalie", 
