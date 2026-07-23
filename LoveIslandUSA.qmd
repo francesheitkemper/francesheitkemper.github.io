@@ -10,7 +10,10 @@ execute:
   warning: false
   message: false
 ---
-The data I looked at this week is all the Love Island USA couples 
+
+Much of this code was written by Emil Hvitfeldt in his <a href = "https://emilhvitfeldt.com/post/love-island-connections/" target = "_blank">Love Island Connections</a> blog.
+
+
 ```{r}
 library(tidyverse)
 library(rvest)
