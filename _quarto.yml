@@ -12,6 +12,8 @@ website:
         text: "Resume"
       - text: "Projects"
         menu:
+        - text: "Love Island USA"
+          href: LoveIslandUSA.qmd
         - text: "UK Baby Names"
           href: UKBabyNames.qmd
         - text: "European Parenting Leave Policies"
