@@ -1,0 +1,17 @@
+{
+  "hash": "01878fadb0e4c4bb5f36a668cc71dac9",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"European Parenting Leave Policies\"\nauthor: \"Frances Heitkemper\"\ndate: June 2, 2026\nformat: \n  html:\n    embed-resources: true\n    code-fold: false\nexecute:\n  warning: false\n  message: false\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(rnaturalearth)\nlibrary(gganimate)\nlibrary(magick)\nlibrary(broom)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\neplp <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-06-02/eplp.csv')\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\neurope <- ne_countries(continent = \"europe\", returnclass = \"sf\")\nyrs <- sort(unique(eplp$year))\n\np <- europe |>\n    mutate(country2 = ifelse(iso_a2_eh == \"GB\", \"UK\", iso_a2_eh)) |>\n    tidyr::expand_grid(year = yrs) |>\n    st_as_sf() |>\n    left_join(eplp, by = c(\"country2\" = \"country\", \"year\")) |>\n    ggplot() +\n    geom_sf(aes(fill = jp_ld_m)) +\n    coord_sf(xlim = c(-10, 45), ylim = c(27,84)) +\n    theme_minimal() +\n    scale_fill_gradient(low = \"white\", high = \"#ff0099\") +\n    transition_states(year, transition_length = 0, state_length = 1) +\n        labs(title = \"year: {closest_state}\")\n\n    animate(p)\n```\n\n::: {.cell-output-display}\n![hi](Parenting_files/figure-html/unnamed-chunk-3-1.gif){fig-alt='hi'}\n:::\n:::\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\neplp |>\n    ggplot(aes(x = par1_ld, y = jp_ld_m, color = year)) +\n    geom_point() +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"grey\") +\n    facet_wrap( ~ par2_for_whom) +\n    theme_minimal() +\n    scale_color_gradient(low = \"white\", high = \"#ff0099\") \n```\n\n::: {.cell-output-display}\n![hi](Parenting_files/figure-html/unnamed-chunk-4-1.png){fig-alt='hi' width=672}\n:::\n:::\n",
+    "supporting": [
+      "Parenting_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
