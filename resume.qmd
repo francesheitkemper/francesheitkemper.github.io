@@ -1,9 +1,5 @@
 ---
 title: "Resume"
-#output: 
-execute: 
-  warning: false
-  message: false
 ---
 
 You can view and download my [resume](Heitkemper, Frances Resume.pdf).
