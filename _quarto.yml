@@ -12,6 +12,10 @@ website:
         text: "Resume"
       - text: "Projects"
         menu:
+        - text: "Foundation Shades"
+          href: FoundationShades.qmd
+        - text: "Commodity Prices"
+          href: CommodityPrice.qmd
         - text: "Love Island USA"
           href: LoveIslandUSA.qmd
         - text: "UK Baby Names"
@@ -28,3 +32,4 @@ format:
       - styles.scss
     toc: true
     page-layout: full
+    include-after-body: search-pink-fix.html

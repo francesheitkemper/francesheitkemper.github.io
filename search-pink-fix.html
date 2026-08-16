@@ -1,0 +1,63 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const PINK = "#feb7c6";
+  const WHITE = "#ffffff";
+
+  function pinkifySelected() {
+    document
+      .querySelectorAll('.aa-Item[aria-selected="true"], .aa-Item:hover')
+      .forEach(function (item) {
+        item.style.setProperty("background-color", PINK, "important");
+        item.style.setProperty("box-shadow", "none", "important");
+        item.style.setProperty("border-color", PINK, "important");
+        item.querySelectorAll("*").forEach(function (child) {
+          child.style.setProperty("color", WHITE, "important");
+          child.style.setProperty("background-color", "transparent", "important");
+        });
+      });
+
+    // Matched-text highlight (<mark> tags Algolia wraps around the typed query)
+    document.querySelectorAll(".aa-Item mark, mark").forEach(function (mark) {
+      mark.style.setProperty("background-color", PINK, "important");
+      mark.style.setProperty("color", "#833655", "important");
+    });
+  }
+
+  const observer = new MutationObserver(function () {
+    observer.disconnect();
+    pinkifySelected();
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["aria-selected", "class"],
+    });
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["aria-selected", "class"],
+  });
+
+  document.body.addEventListener("mouseover", function (e) {
+    const item = e.target.closest(".aa-Item");
+    if (item) pinkifySelected();
+  });
+
+  document.body.addEventListener("input", function (e) {
+    if (e.target.classList.contains("aa-Input")) {
+      // results re-render async, give it a beat
+      setTimeout(pinkifySelected, 50);
+    }
+  });
+
+  document.body.addEventListener("keydown", function (e) {
+    if (e.target.classList.contains("aa-Input")) {
+      setTimeout(pinkifySelected, 50);
+    }
+  });
+
+  pinkifySelected();
+});
+</script>

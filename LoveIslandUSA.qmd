@@ -100,8 +100,6 @@ as_tbl_graph(data, directed = FALSE) |>
 #| results: asis
 #| dev.args: !expr list(bg = "transparent")
 
-set.seed(1234)
-
 for (season in sort(unique(li_data$season))) {
   cat("\n\n## Season", season, "\n\n")
   print(chart_graph(li_data[li_data$season == season, ]))

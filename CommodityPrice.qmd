@@ -1,0 +1,75 @@
+---
+title: "Commodity Price"
+author: "Frances Heitkemper"
+date: August 7, 2026
+format: 
+  html:
+    embed-resources: true
+    code-fold: false
+execute:
+  warning: false
+  message: false
+---
+```{r}
+library(tidyverse)
+```
+
+```{r}
+gold <- readr::read_csv(
+ 'https://raw.githubusercontent.com/datasets/gold-prices/refs/heads/main/data/monthly-processed.csv') |>
+    rename(`Gold Price` = Price)
+
+oil <- readr::read_csv('https://raw.githubusercontent.com/datasets/oil-prices/refs/heads/main/data/wti-monthly.csv') |>
+    rename(`Oil Price` = Price)
+
+nat_gas <- readr::read_csv('https://raw.githubusercontent.com/datasets/natural-gas/refs/heads/main/data/monthly-processed.csv') |>
+    rename(`Nautral Gas Price` = Price)
+
+vix <- readr::read_csv('https://raw.githubusercontent.com/datasets/finance-vix/refs/heads/main/data/vix-monthly.csv') |>
+    rename(`Volatility Index` = Close)  # volatility index
+
+bond <- readr::read_csv('https://raw.githubusercontent.com/datasets/bond-yields-us-10y/refs/heads/main/data/monthly.csv') |>
+    rename(`Bond Rate` = Rate) # bond yields us 10y
+
+temp <- readr::read_csv('https://raw.githubusercontent.com/datasets/global-temp/refs/heads/main/data/monthly.csv') |>
+    mutate(Date = lubridate::as_date(paste0(Year, "-01"))) |>
+    rename(`Tempature Difference` = Mean)|>
+    select(-Year, -Source)
+
+sp <- readr::read_csv('https://raw.githubusercontent.com/datasets/s-and-p-500/refs/heads/main/data/data.csv') |>
+    select(Date, SP500)
+
+full_data <- gold |>
+    full_join(oil)|>
+    full_join(nat_gas)|>
+    full_join(vix)|>
+    full_join(bond)|>
+    full_join(bond)|>
+    full_join(temp)|>
+    full_join(sp)
+```
+
+```{r}
+full_data |>
+    select(Date, `Oil Price`) |>
+    drop_na() |>
+    ggplot(aes(x = Date, y = `Oil Price`)) +
+    geom_line() 
+```
+
+```{r}
+plot_ts <- function(variable, log = TRUE) {
+    if (log) {full_data |>
+    select(Date, {{variable}}) |>
+    drop_na() |>
+    ggplot(aes(x = Date, y = {{variable}})) +
+    geom_line() +
+    scale_y_log10()
+    }else{full_data |>
+    select(Date, {{variable}}) |>
+    drop_na() |>
+    ggplot(aes(x = Date, y = {{variable}})) +
+    geom_line()
+    }
+}
+```

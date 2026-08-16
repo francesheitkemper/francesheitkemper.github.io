@@ -11,14 +11,43 @@ $code-block-bg: #ffebeb;
 $code-block-border-left: #feb7c6;
 
 /*-- scss:rules --*/
+
+/* Algolia autocomplete theme variables — this is what ACTUALLY controls
+   the blue highlight on the selected/hovered search result row */
+:root {
+  --aa-selected-color-rgb: 254, 183, 198;
+  --aa-selected-color-alpha: 1;
+  --aa-primary-color-rgb: 131, 54, 85;
+  --aa-primary-color-alpha: 1;
+}
+
+/* ============================
+   NAVBAR
+   ============================ */
 .navbar {
   background-color: var(--bs-primary) !important;
 }
 
+.navbar-title,
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #333 !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #833655 !important;
+}
+
+/* ============================
+   HEADINGS
+   ============================ */
 h1, h2, h3, h4, h5, h6 {
   color: #000000 !important;
 }
 
+/* ============================
+   BUTTONS / LINKS
+   ============================ */
 .btn-primary {
   background-color: var(--bs-primary) !important;
   border-color: var(--bs-primary) !important;
@@ -32,12 +61,187 @@ h1, h2, h3, h4, h5, h6 {
   color: #833655 !important;
 }
 
-.navbar-title,
-.navbar-brand,
-.navbar-nav .nav-link {
-  color: #333 !important;
+/* ============================
+   SEARCH BAR
+   ============================ */
+
+/* Search icon button (before clicking) */
+#quarto-search .aa-DetachedSearchButtonIcon svg {
+  fill: #833655 !important;
 }
 
-.navbar-nav .nav-link:hover {
+/* Kill native browser search-input styling (removes blue glow) */
+.aa-Input,
+.aa-Input:focus,
+.aa-Input:focus-visible {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Search input appearance */
+.aa-Input {
+  background-color: var(--bs-secondary) !important;
+  color: #000000 !important;
+  border: 1px solid var(--bs-primary) !important;
+}
+
+/* Your custom focus style, applied on top of the reset above */
+.aa-Input:focus,
+.aa-Input:focus-visible {
+  border: 1px solid #833655 !important;
+  box-shadow: 0 0 0 2px rgba(254, 183, 198, 0.5) !important;
+}
+
+.aa-Input::placeholder {
+  color: #c94f7c !important;
+}
+
+/* Form + detached overlay backgrounds */
+.aa-Form,
+.aa-DetachedFormContainer {
+  background-color: var(--bs-secondary) !important;
+}
+
+.aa-DetachedContainer {
+  background-color: var(--bs-body-bg) !important;
+}
+
+.aa-DetachedOverlay {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Submit + clear icons */
+.aa-SubmitIcon,
+.aa-ClearIcon {
+  fill: #833655 !important;
+}
+
+/* Cancel button */
+.aa-DetachedCancelButton {
   color: #833655 !important;
 }
+
+/* Results panel */
+.aa-Panel {
+  background-color: var(--bs-body-bg) !important;
+}
+
+.aa-SourceNoResults {
+  color: #833655 !important;
+}
+
+/* "N matching documents" header bar */
+.aa-SourceHeader,
+.search-result-header {
+  background-color: var(--bs-secondary) !important;
+  color: #833655 !important;
+}
+
+/* Result items */
+.aa-Item {
+  background-color: var(--bs-body-bg) !important;
+  color: #000000 !important;
+}
+
+.aa-Item p,
+.aa-Item mark {
+  color: inherit !important;
+}
+
+/* Selected / hovered result item (this is the blue highlight) */
+.aa-Item[aria-selected="true"],
+.aa-Item:hover,
+#quarto-search-results [aria-selected="true"],
+#quarto-search-results .aa-ItemWrapper[aria-selected="true"],
+.aa-Item[aria-selected="true"] .aa-ItemWrapper,
+.aa-Item[aria-selected="true"] .aa-ItemContent,
+.aa-Item[aria-selected="true"] .aa-ItemLink,
+.aa-Item:hover .aa-ItemWrapper,
+.aa-Item:hover .aa-ItemContent,
+.aa-Item:hover .aa-ItemLink {
+  background-color: var(--bs-primary) !important;
+}
+
+.aa-Item[aria-selected="true"] *,
+.aa-Item:hover *,
+#quarto-search-results [aria-selected="true"] * {
+  color: #ffffff !important;
+}
+
+/* Catch-all: some Quarto builds apply the highlight as an inline style or a differently-named class */
+.aa-Item.aa-ItemActive,
+.aa-Item.aa-ItemActive * {
+  background-color: var(--bs-primary) !important;
+  color: #ffffff !important;
+}
+
+/* ============================
+   PROJECTS DROPDOWN MENU
+   ============================ */
+
+.dropdown-menu {
+  background-color: var(--bs-secondary) !important;
+  border: 1px solid var(--bs-primary) !important;
+}
+
+.dropdown-item {
+  color: #833655 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--bs-primary) !important;
+  color: #ffffff !important;
+}
+
+/* ============================
+   SEASON TAB BUTTONS
+   ============================ */
+
+.nav-tabs,
+.panel-tabset > .nav-tabs {
+  background-color: var(--bs-secondary) !important;
+  border-bottom: 1px solid var(--bs-primary) !important;
+}
+
+.tab-content {
+  background-color: var(--bs-body-bg) !important;
+}
+
+.nav-link {
+  background-color: var(--bs-secondary) !important;
+  color: #833655 !important;
+}
+
+.nav-link:hover {
+  background-color: var(--bs-primary) !important;
+  color: #ffffff !important;
+}
+
+.nav-link.active {
+  background-color: var(--bs-primary) !important;
+  color: #ffffff !important;
+}
+
+
+/* Non-selected item text/links (Quarto's actual search result markup) */
+.search-result-title,
+.search-result-text,
+.search-result-title-container,
+.search-result-icon,
+li[class^="search-result"] {
+  color: #833655 !important;
+}
+
+/* Selected/active result row (Quarto's own highlight class) */
+.search-result-item.aa-Item[aria-selected="true"] .search-result-title,
+.search-result-item.aa-Item[aria-selected="true"] .search-result-text,
+.aa-Item[aria-selected="true"] .search-result-title,
+.aa-Item[aria-selected="true"] .search-result-text,
+.aa-Item:hover .search-result-title,
+.aa-Item:hover .search-result-text {
+  color: #ffffff !important;
+}
+
