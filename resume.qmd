@@ -6,6 +6,6 @@ execute:
   message: false
 ---
 
-You can view and download my [resume](FrancesHeitkemperResume.pdf).
+You can view and download my [resume](Frances Heitkemper Resume.pdf).
 
-<iframe src="FrancesHeitkemperResume.pdf" width="100%" height="800" style="border: none;"></iframe>
+<iframe src="Frances Heitkemper Resume.pdf" width="100%" height="800" style="border: none;"></iframe>
