@@ -10,7 +10,9 @@ execute:
   warning: false
   message: false
 ---
+We looked at the shades of four foundations: Armani Luminos Silk Foundation, Charlotte Tilbury Flawless Filter Foundation, Fenty Pro Filter Foundation, and Haus Labs Triclone Skin Tech Foundation. The HEX color of each shade was taken from screenshots of the make-up provided by <a href = "https://www.sephora.com/" target = " _blank">Sephora</a>.
 
+Armani Luminos Silk has a good number of options but a small range of shades, with few that are particularly light or dark. Charlot tillburry Flawless Filter Foundation has very few shades and none that are particularly dark. Fenty Pro Filter Foundation has the second-most shades but the widest range of light and dark shades. Haus Labs has the most shades, including many darker shades but doesn't get as light as Fenty.
 ```{r}
 library(tidyverse)
 ```

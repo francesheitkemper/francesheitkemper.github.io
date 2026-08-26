@@ -10,6 +10,7 @@ execute:
   warning: false
   message: false
 ---
+We looked at baby name popularity in the UK over time. Since the dataset had many names I specifically tried to pick unisex names to see the difference between female and male name popularity. The data are taken from <a href = "https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-06-16" target = "_blank">TidyTuesday 6-16-2026</a>.
 
 ```{r}
 library(tidyverse)
@@ -29,6 +30,6 @@ scotland_names |>
 filter(Name %in% c("Taylor", "Sam", "Charlie", "Alex", "Blake")) |>
 ggplot(aes(x = Year, y = Number, shape = Sex)) +
 geom_point(color = "purple") +
-geom_line(aes(color=Name))
+geom_line(aes(color=Name)) +
 labs(title = "baby names")
 ```

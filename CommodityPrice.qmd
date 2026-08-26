@@ -1,5 +1,5 @@
 ---
-title: "Commodity Price"
+title: "Commodity Prices"
 author: "Frances Heitkemper"
 date: August 7, 2026
 format: 
@@ -10,6 +10,7 @@ execute:
   warning: false
   message: false
 ---
+We looked at gold price, oil price, natural gas price, VIX, bond rate, temperature difference, and S&P 500 data from <a href = "https://github.com/datasets" target = "_blank">Curated Open Data</a>. We graphed the indices against time and created a Shiny app to switch between variables.
 ```{r}
 library(tidyverse)
 ```
@@ -72,4 +73,6 @@ plot_ts <- function(variable, log = TRUE) {
     geom_line()
     }
 }
+
+plot_ts(SP500, log = TRUE)
 ```

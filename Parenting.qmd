@@ -10,7 +10,7 @@ execute:
   warning: false
   message: false
 ---
-
+We looked at how parenting leave policies change throughout time across different European countries. The data are taken from <a href = "https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-06-02" target = "_blank">TidyTuesday 6-02-2026</a>.
 ```{r}
 library(tidyverse)
 library(sf)

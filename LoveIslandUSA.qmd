@@ -11,6 +11,8 @@ execute:
   message: false
 ---
 
+We looked at who was coupled up in each of the 8 seasons of Love Island USA and graphed everyone who was coupled up together. The data were scraped from the <a href = "https://en.wikipedia.org/wiki/Love_Island_USA" target = "_blank">Love Island USA Wikipedia page</a>.
+
 Much of this code was written by Emil Hvitfeldt in his <a href = "https://emilhvitfeldt.com/post/love-island-connections/" target = "_blank">Love Island Connections</a> blog.
 
 
