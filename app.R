@@ -1,21 +1,7 @@
----
-title: "Commodity Prices"
-author: "Frances Heitkemper"
-date: August 7, 2026
-format: 
-  html:
-    embed-resources: true
-    code-fold: false
-execute:
-  warning: false
-  message: false
----
-We looked at gold price, oil price, natural gas price, VIX, bond rate, temperature difference, and S&P 500 data from <a href = "https://github.com/datasets" target = "_blank">Curated Open Data</a>. We graphed the indices against time and created a <a href = "https://francesheitkemper-commodity-pricing.share.connect.posit.cloud" target = "_blank">Shiny app</a> to switch between variables.
-```{r}
+library(shiny)
 library(tidyverse)
-```
+library(bslib)
 
-```{r}
 gold <- readr::read_csv(
  'https://raw.githubusercontent.com/datasets/gold-prices/refs/heads/main/data/monthly-processed.csv') |>
     rename(`Gold Price` = Price)
@@ -48,32 +34,45 @@ full_data <- gold |>
     full_join(bond)|>
     full_join(temp)|>
     full_join(sp)
-```
 
-```{r}
-full_data |>
-    select(Date, `Oil Price`) |>
-    drop_na() |>
-    ggplot(aes(x = Date, y = `Oil Price`)) +
-    geom_line(color = "pink") + 
-    theme_minimal()
-```
+y_choices <- setdiff(names(full_data), "Date")
 
-```{r}
-plot_ts <- function(variable, log = TRUE) {
-    if (log) {full_data |>
-    select(Date, {{variable}}) |>
+plot_ts <- function(variable, log = TRUE, date_range) {
+  p <- full_data |>
+    select(Date, .data[[variable]]) |>
+    filter(between(Date, as.Date(date_range[1]), as.Date(date_range[2]))) |>
     drop_na() |>
-    ggplot(aes(x = Date, y = {{variable}})) +
-    geom_line() +
-    scale_y_log10()
-    }else{full_data |>
-    select(Date, {{variable}}) |>
-    drop_na() |>
-    ggplot(aes(x = Date, y = {{variable}})) +
-    geom_line()
-    }
+    ggplot(aes(x = Date, y = .data[[variable]])) +
+    geom_line(color = "pink") +
+    theme_minimal() +
+    labs(x = "date", y = variable)
+
+  if (log) {
+    p <- p + scale_y_log10()
+  }
+  p
 }
-```
 
-<iframe src = "https://francesheitkemper-commodity-pricing.share.connect.posit.cloud" width = "90%" height = "800" style = "border: none;" data-external = "1"></iframe>
+ui <- page_sidebar(
+  title = "Market Indicators Explorer",
+  sidebar = sidebar(
+    selectInput("rainbow", "Variable to plot:", choices = y_choices),
+    checkboxInput("unicorn", "Log scale (y-axis)", value = TRUE),
+    dateRangeInput("butterfly",
+      label = "Date Range", 
+      start = "1833-01-01", 
+      end = "2026-08-25",
+      min = "1833-01-01", 
+      max = "2026-08-25",
+      format = "yyyy-mm-dd"
+  )),
+  plotOutput("the_plot")
+)
+
+server <- function(input, output) {
+  output$the_plot <- renderPlot({
+    plot_ts(input$rainbow, log = input$unicorn, date_range = input$butterfly)
+  })
+}
+
+shinyApp(ui, server)
